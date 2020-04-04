@@ -9,7 +9,7 @@ def read_file(fn):
 
 setup(
     name="argparse_helper",
-    version="0.9.1",
+    version="0.9.2",
     description="Yet another argparse helper: complex subcommand trees made simple",
     long_description=read_file("README.md"),
     long_description_content_type="text/markdown",

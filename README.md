@@ -30,7 +30,8 @@ position.
 Where a flag is repeated in an `add_command` call, the second and subsequent values receive an
 `OptionalOveride` setting automatically.
 
-    parser.add_command("--glob xyzzy --glob", glob=dict(action=OptionalOverride))
+    parser.add_command("--glob xyzzy --glob", glob=dict(action=AtMostOnce))
+    # the second iteration becomes OptionalOverride
 
 Finally, `AtMostOnce` is supplied as an action type; this causes an explicit error (rather than
 just overriding the previous value) if a flag is specified more than once.
