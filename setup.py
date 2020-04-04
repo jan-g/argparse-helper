@@ -9,11 +9,13 @@ def read_file(fn):
 
 setup(
     name="argparse_helper",
-    version="0.9.0",
+    version="0.9.1",
     description="Yet another argparse helper: complex subcommand trees made simple",
     long_description=read_file("README.md"),
+    long_description_content_type="text/markdown",
     author="jang",
     author_email="argparse_helper@ioctl.org",
+    url="https://github.com/jan-g/argparse-helper",
     license="Apache License 2.0",
     packages=find_packages(exclude=["test.*, *.test", "test*"]),
 

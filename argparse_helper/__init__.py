@@ -51,7 +51,6 @@ class ArgumentParser(argparse.ArgumentParser):
         return self._branch
 
     def parse_args(self, *args, namespace=None):
-        print("parse_args called on", self, "with", namespace)
         return super().parse_args(*args, namespace=namespace)
 
 
