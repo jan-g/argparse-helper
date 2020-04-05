@@ -1,4 +1,4 @@
-# A wrapper around argparse
+# Yet another argparse helper: complex sub-command trees made simple
 
 Writing complex subcommand parsers using `argparse` is certainly possible, but it involves a lot
 of laborious repetition.

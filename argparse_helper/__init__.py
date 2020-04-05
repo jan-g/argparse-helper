@@ -1,3 +1,6 @@
+__license__ = "Apache License 2.0"
+__author__ = "jan grant <argparse-helper@ioctl.org>"
+
 import argparse
 from argparse import *
 from collections import defaultdict
