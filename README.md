@@ -33,5 +33,8 @@ Where a flag is repeated in an `add_command` call, the second and subsequent val
     parser.add_command("--glob xyzzy --glob", glob=dict(action=AtMostOnce))
     # the second iteration becomes OptionalOverride
 
-Finally, `AtMostOnce` is supplied as an action type; this causes an explicit error (rather than
+`AtMostOnce` is supplied as an action type; this causes an explicit error (rather than
 just overriding the previous value) if a flag is specified more than once.
+
+We also have `AppendN(t)` as an action type. It works like `Append`, but the type constructor
+`t` is applied to its collected argument(s) before the result is appended to the list.

@@ -104,6 +104,17 @@ def cmd(name):
     return _
 
 
+class A:
+    def __init__(self, *values):
+        self.values = values
+
+    def __eq__(self, other):
+        return type(self) == type(other) and vars(self) == vars(other)
+
+    def __str__(self):
+        return "{}({})".format(type(self).__name__, vars(self))
+
+
 @pytest.mark.parametrize("command,func,values", [
     ("", None, dict(api_endpoint="https://some.service.or.other/v1", aa="foo", bb="bar")),
     ("--help", SystemExit(0), {}),
@@ -132,6 +143,7 @@ def cmd(name):
     ("--aa a0 bb create --json --aa a2", UsageError("--aa may be specified at most once"), dict()),
     ("--aa a0 --aa a1 bb create --json", UsageError("--aa may be specified at most once"), dict()),
     ("bb create --json --aa a2 --aa a3", UsageError("--aa may be specified at most once"), dict()),
+    ("bb create --json --foo bar baz --foo x y", "bb_create", dict(foo=[A("bar", "baz"), A("x", "y")])),
 ], ids=sanitise)
 def test_complex_commands(command, func, values):
     p = make_arg_parser()
@@ -239,12 +251,13 @@ def make_arg_parser():
                        aa=dict(action=argparse.OptionalOverride),
                        )
 
-    parser.add_command("bb create --json --aa --bb --loc1 --loc2 --path",
+    parser.add_command("bb create --json --aa --bb --loc1 --loc2 --path --foo",
                        func=cmd("bb_create"),
                        **json,
                        aa=dict(action=argparse.OptionalOverride),
                        bb=dict(action=argparse.OptionalOverride),
                        path=dict(default="."),
+                       foo=dict(action=argparse.AppendN(A), nargs=2)
                        )
 
     return parser

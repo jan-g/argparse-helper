@@ -175,5 +175,14 @@ class AtMostOnce(argparse.Action):
         setattr(namespace, "__set_{}".format(self.dest), True)
 
 
+def AppendN(type=str):
+    class _AppendN(argparse._AppendAction):
+
+        def __call__(self, parser, namespace, values, option_string=None):
+            super().__call__(parser, namespace, type(*values), option_string)
+
+    return _AppendN
+
+
 class UsageError(Exception):
     pass
