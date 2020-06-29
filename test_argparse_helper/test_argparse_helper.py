@@ -261,3 +261,14 @@ def make_arg_parser():
                        )
 
     return parser
+
+
+def test_minor_append_coercion():
+    p = argparse.ArgumentParser()
+    p.add_command("--major --minor",
+                  major=dict(action=argparse.MajorAppend),
+                  minor=dict(dest="major", action=argparse.MinorAppend(), type=int),
+                  )
+    a = p.parse_args("--major x --minor 2 --minor 3 --major y --minor 4".split())
+
+    assert a.major == {"x": [2, 3], "y": [4]}
